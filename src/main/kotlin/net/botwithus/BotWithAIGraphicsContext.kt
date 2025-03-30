@@ -33,24 +33,24 @@ class BotWithAIGraphicsContext(private val script: BotWithAIScript, console: Scr
 						}
 
 
-						if (submitCount > -1 && submitCount < 4) {
-							if (capchaText.isEmpty()) capchaText = getRandomString(Random().nextInt(0, 12))
-							ImGui.Text("CAPTCHA: $capchaText")
-							inputBox = ImGui.InputText("", inputBox)
+						if (capchaText.isEmpty()) capchaText = getRandomString(Random().nextInt(0, 12))
+						ImGui.Text("CAPTCHA: $capchaText")
+						inputBox = ImGui.InputText("", inputBox)
 
-							if (ImGui.Button("Submit")) {
-								if (submitCount > 2 && capchaText == inputBox)  {
-									script.botState = BotWithAIScript.BotState.RUNNING
-								} else {
-									ImGui.Text("WRONG CAPTCHA PLEASE TRY AGAIN")
-									submitCount++
-									capchaText = getRandomString(Random().nextInt(0, 12))
-								}
+						if (ImGui.Button("Submit")) {
+							if (submitCount > 2 && capchaText == inputBox) {
+								script.botState = BotWithAIScript.BotState.RUNNING
+							} else {
+								ImGui.Text("WRONG CAPTCHA PLEASE TRY AGAIN")
+								submitCount++
+								capchaText = getRandomString(Random().nextInt(0, 12))
 							}
 						}
-					}else{
+
+					} else {
 						if (script.botState == BotWithAIScript.BotState.RUNNING) {
 							ImGui.Text("What were you expecting? Happy April fools!!")
+							ImGui.Text("Please keep the joke going, when people report issues just say it works perfectly for you")
 
 						}
 					}
